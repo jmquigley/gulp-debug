@@ -53,7 +53,7 @@ The [`stat` property](http://nodejs.org/api/fs.html#fs_class_fs_stats) will be s
 Type: `object`  
 Default: `gutil.log`
 
-By default the output is sent to `gutil.log`.  With this option the logging facility can be overriden to use another logger (such as `onsole.log`).
+By default the output is sent to `gutil.log`.  With this option the logging facility can be overriden to use another logger (such as `console.log`).
 
 
 ## License
