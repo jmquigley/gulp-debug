@@ -13,31 +13,33 @@ module.exports = opts => {
 	opts = Object.assign({
 		title: 'gulp-debug:',
 		minimal: true,
-		log: gutil.log
+		log: gutil.log,
+		showFiles: true
 	}, opts);
 
 	if (process.argv.indexOf('--verbose') !== -1) {
 		opts.verbose = true;
 		opts.minimal = false;
+		opts.showFiles = true;
 	}
 
 	let count = 0;
 
 	return through.obj((file, enc, cb) => {
-		const full =
-			'\n' +
-			(file.cwd ? 'cwd:   ' + prop(tildify(file.cwd)) : '') +
-			(file.base ? '\nbase:  ' + prop(tildify(file.base)) : '') +
-			(file.path ? '\npath:  ' + prop(tildify(file.path)) : '') +
-			(file.stat && opts.verbose ? '\nstat:  ' + prop(stringifyObject(file.stat, {indent: '       '}).replace(/[{}]/g, '').trim()) : '') +
-			'\n';
+		if (opts.showFiles) {
+			const full =
+				'\n' +
+				(file.cwd ? 'cwd:   ' + prop(tildify(file.cwd)) : '') +
+				(file.base ? '\nbase:  ' + prop(tildify(file.base)) : '') +
+				(file.path ? '\npath:  ' + prop(tildify(file.path)) : '') +
+				(file.stat && opts.verbose ? '\nstat:  ' + prop(stringifyObject(file.stat, {indent: '       '}).replace(/[{}]/g, '').trim()) : '') +
+				'\n';
 
-		const output = opts.minimal ? prop(path.relative(process.cwd(), file.path)) : full;
+			const output = opts.minimal ? prop(path.relative(process.cwd(), file.path)) : full;
+			opts.log(opts.title + ' ' + output);
+		}
 
 		count++;
-
-		opts.log(opts.title + ' ' + output);
-
 		cb(null, file);
 	}, cb => {
 		opts.log(opts.title + ' ' + chalk.green(count + ' ' + plur('item', count)));

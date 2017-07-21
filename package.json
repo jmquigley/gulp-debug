@@ -1,7 +1,7 @@
 {
   "name": "gulp-debug",
-  "version": "3.0.0",
-  "description": "Debug vinyl file streams to see what files are run through your gulp pipeline",
+  "version": "3.1.0",
+  "description": "Debug Vinyl file streams to see what files are run through your Gulp pipeline",
   "license": "MIT",
   "repository": "sindresorhus/gulp-debug",
   "author": {
@@ -13,7 +13,7 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "xo && mocha"
+    "test": "xo && ava"
   },
   "files": [
     "index.js"
@@ -39,14 +39,15 @@
     "tildify": "^1.1.2"
   },
   "devDependencies": {
+    "ava": "*",
     "gulp": "^3.8.10",
-    "mocha": "*",
+    "p-event": "^1.0.0",
     "proxyquire": "^1.0.1",
-    "sinon": "^1.9.1",
+    "sinon": "^2.1.0",
     "strip-ansi": "^3.0.0",
     "xo": "*"
   },
-  "xo": {
-    "esnext": true
+  "ava": {
+    "serial": true
   }
 }
